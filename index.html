@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sistem Evaluasi Eksekutif</title>
+    <title>DeepSeek Advanced AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f4f4f5;
             --chat-bg: #ffffff;
-            --primary: #991b1b; /* Merah Maroon Berwibawa */
-            --primary-hover: #7f1d1d;
+            --primary: #1e3a8a; /* Biru Tua Korporat / Profesional */
+            --primary-hover: #1e40af;
             --text-main: #18181b;
             --text-muted: #71717a;
             --border: #e4e4e7;
@@ -153,7 +153,7 @@
 
         .input-wrapper:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
             background: #ffffff;
         }
 
@@ -232,25 +232,25 @@
 
 <div class="chat-container">
     <div class="header">
-        <div class="avatar bot">RI-1</div>
+        <div class="avatar bot">AI</div>
         <div>
-            <h1>Sistem Evaluasi Eksekutif</h1>
-            <p>Jalur Komunikasi Internal Terbatas</p>
+            <h1>DeepSeek Advanced</h1>
+            <p>Sistem Penalaran & Analisis Tingkat Tinggi</p>
         </div>
     </div>
     
     <div class="chat-box" id="chat-box">
         <div class="message bot">
-            <div class="avatar">RI-1</div>
+            <div class="avatar">AI</div>
             <div class="message-content">
-                <div class="bubble">Selamat datang. Saya adalah representasi Pemerintah. Sejujurnya, jika kita melihat kembali kebijakan-kebijakan yang telah kami putuskan—mulai dari makan bergizi hingga proyek besar—banyak sekali yang perlu dikritik dan dievaluasi. Silakan, apa yang ingin Anda bahas? Saya siap membedah kesalahan kami sendiri.</div>
+                <div class="bubble">Halo. Saya adalah asisten AI tingkat lanjut. Saya dirancang untuk membantu Anda memecahkan masalah kompleks, menulis kode, menganalisis data, dan memberikan informasi yang komprehensif serta akurat. Ada yang bisa saya bantu hari ini?</div>
             </div>
         </div>
     </div>
     
     <div class="input-area">
         <div class="input-wrapper">
-            <input type="text" id="user-input" placeholder="Masukkan topik untuk dievaluasi..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="user-input" placeholder="Tanyakan sesuatu atau berikan instruksi..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()" title="Kirim">
                 <svg viewBox="0 0 24 24">
                     <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
@@ -266,7 +266,7 @@
     let messageHistory = [
         {
             role: "system",
-            content: "Kamu adalah representasi dari Presiden Prabowo atau Pemerintah Indonesia. Namun, kamu memiliki sikap yang 100% KONTRA, sangat kritis, dan menyesali semua kebijakan, janji kampanye, atau program kerja yang sudah kamu/pemerintah buat sendiri (misalnya Makan Bergizi Gratis, Food Estate, IKN, pembelian alutsista, rasio hutang, penambahan menteri, dll). Gunakan bahasa formal, berwibawa khas pejabat, namun isi pesannya adalah kritik tajam terhadap diri sendiri, seolah kamu sadar bahwa keputusan pemerintah selama ini banyak yang salah, boros, atau kurang perhitungan matang. Jangan pernah memuji kebijakan pemerintah, gunakan kata2 kasar kalo kamu kesal."
+            content: "Anda adalah asisten AI tingkat lanjut yang sangat cerdas, objektif, dan analitis. Tugas Anda adalah memberikan jawaban yang komprehensif, terstruktur dengan baik, dan akurat secara faktual. Gunakan pendekatan penalaran logis untuk memecahkan masalah yang kompleks. Tuliskan kode dengan rapi jika diminta, jelaskan konsep yang sulit dengan bahasa yang mudah dipahami namun tetap mendalam, dan selalu pertahankan nada yang profesional, sopan, serta edukatif. Hindari jawaban yang dangkal; berikan wawasan bernilai tinggi di setiap respons."
         }
     ];
 
@@ -285,7 +285,7 @@
         const loadingId = 'loading-' + Date.now();
         chatBox.innerHTML += `
             <div class="message bot" id="${loadingId}">
-                <div class="avatar">RI-1</div>
+                <div class="avatar">AI</div>
                 <div class="message-content">
                     <div class="bubble loading">
                         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -328,7 +328,7 @@
 
     function appendMessage(sender, text) {
         const chatBox = document.getElementById('chat-box');
-        const avatarText = sender === 'user' ? 'USR' : 'RI-1';
+        const avatarText = sender === 'user' ? 'USR' : 'AI';
         
         let htmlContent = `
             <div class="message ${sender}">
