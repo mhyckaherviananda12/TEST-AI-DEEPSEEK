@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DeepSeek Chat Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Sistem Evaluasi Eksekutif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #e5e7eb;
+            --bg-color: #f4f4f5;
             --chat-bg: #ffffff;
-            --primary: #10a37f; 
-            --primary-hover: #0d8a6b;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --user-bubble: #f3f4f6;
+            --primary: #991b1b; /* Merah Maroon Berwibawa */
+            --primary-hover: #7f1d1d;
+            --text-main: #18181b;
+            --text-muted: #71717a;
+            --border: #e4e4e7;
+            --user-bubble: #f4f4f5;
             --bot-bubble: #ffffff;
         }
 
@@ -23,12 +23,11 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg-color);
-            background-image: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             display: flex; 
             justify-content: center; 
             align-items: center;
             height: 100vh;
-            height: 100dvh; /* Mencegah tertutup UI browser mobile */
+            height: 100dvh; 
             color: var(--text-main);
         }
 
@@ -37,25 +36,36 @@
             max-width: 850px; 
             height: 92vh;
             background: var(--chat-bg); 
-            border-radius: 16px; 
-            box-shadow: 0 12px 48px rgba(0,0,0,0.1); 
+            border-radius: 12px; 
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
             display: flex; 
             flex-direction: column; 
             overflow: hidden; 
         }
 
         .header { 
-            padding: 16px 24px; 
+            padding: 20px 24px; 
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             background: var(--chat-bg);
             z-index: 10;
         }
         
-        .header h1 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
-        .header p { font-size: 0.85rem; color: var(--text-muted); }
+        .header h1 { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+        .header p { 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            margin-top: 2px;
+        }
 
         .chat-box { 
             flex: 1; 
@@ -69,27 +79,30 @@
 
         .chat-box::-webkit-scrollbar { width: 6px; }
         .chat-box::-webkit-scrollbar-track { background: transparent; }
-        .chat-box::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
-        .chat-box::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+        .chat-box::-webkit-scrollbar-thumb { 
+            background: #d4d4d8; 
+            border-radius: 10px; 
+        }
+        .chat-box::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
 
-        .message { display: flex; gap: 12px; max-width: 100%; }
+        .message { display: flex; gap: 16px; max-width: 100%; }
         .message.user { flex-direction: row-reverse; }
 
         .avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.85rem;
             font-weight: 600;
             flex-shrink: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            letter-spacing: 0.5px;
         }
         
-        .user .avatar { background: var(--primary); color: white; }
-        .bot .avatar { background: #1f2937; color: white; }
+        .user .avatar { background: #3f3f46; color: white; }
+        .bot .avatar { background: var(--primary); color: white; }
 
         .message-content {
             display: flex;
@@ -101,9 +114,9 @@
         .user .message-content { align-items: flex-end; }
 
         .bubble { 
-            padding: 12px 16px; 
-            border-radius: 16px; 
-            line-height: 1.5; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            line-height: 1.6; 
             font-size: 0.95rem;
             word-wrap: break-word;
         }
@@ -118,29 +131,30 @@
             background: var(--bot-bubble); 
             border: 1px solid var(--border);
             border-top-left-radius: 4px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .input-area { 
-            padding: 16px 24px; 
+            padding: 20px 24px; 
             background: var(--chat-bg); 
             border-top: 1px solid var(--border);
-            padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* Dukungan area aman iOS/Android */
+            padding-bottom: calc(20px + env(safe-area-inset-bottom));
         }
 
         .input-wrapper {
             display: flex;
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 24px;
-            padding: 6px 6px 6px 20px;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 8px 8px 16px;
+            transition: border-color 0.2s, box-shadow 0.2s;
             align-items: center;
         }
 
         .input-wrapper:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
+            box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+            background: #ffffff;
         }
 
         .input-wrapper input { 
@@ -148,30 +162,33 @@
             border: none; 
             outline: none; 
             font-size: 0.95rem; 
+            color: var(--text-main);
             background: transparent;
             font-family: 'Inter', sans-serif;
             width: 100%;
         }
+        
+        .input-wrapper input::placeholder { color: #a1a1aa; }
 
         .input-wrapper button { 
             background: var(--primary); 
             color: white; 
             border: none; 
-            width: 38px;
-            height: 38px;
-            border-radius: 50%; 
+            width: 36px;
+            height: 36px;
+            border-radius: 6px; 
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer; 
-            transition: transform 0.1s, background 0.2s;
+            transition: all 0.2s;
             flex-shrink: 0;
-            margin-left: 8px;
+            margin-left: 12px;
         }
 
         .input-wrapper button:hover { background: var(--primary-hover); }
         .input-wrapper button:active { transform: scale(0.95); }
-        .input-wrapper button svg { width: 18px; height: 18px; fill: currentColor; margin-right: 2px; }
+        .input-wrapper button svg { width: 16px; height: 16px; fill: currentColor; }
 
         .loading { 
             display: flex; 
@@ -194,23 +211,20 @@
             40% { transform: scale(1); }
         }
 
-        /* MEDIA QUERY UNTUK HP (MOBILE RESPONSIVE) */
         @media screen and (max-width: 768px) {
             body { background: var(--chat-bg); }
-            
             .chat-container {
                 width: 100%;
-                height: 100dvh; /* Full screen di HP */
+                height: 100dvh;
                 max-width: none;
                 border-radius: 0;
+                border: none;
                 box-shadow: none;
             }
-
-            .header { padding: 12px 16px; }
+            .header { padding: 16px; }
             .chat-box { padding: 16px; gap: 16px; }
-            .message-content { max-width: 88%; } /* Gelembung chat lebih lebar di HP */
+            .message-content { max-width: 88%; }
             .input-area { padding: 12px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
-            .bubble { font-size: 0.9rem; padding: 10px 14px; }
         }
     </style>
 </head>
@@ -218,25 +232,25 @@
 
 <div class="chat-container">
     <div class="header">
-        <div class="avatar" style="background: #1f2937; color: white;">AI</div>
+        <div class="avatar bot">RI-1</div>
         <div>
-            <h1>DeepSeek Chat</h1>
-            <p>Fast & Smart Assistant</p>
+            <h1>Sistem Evaluasi Eksekutif</h1>
+            <p>Jalur Komunikasi Internal Terbatas</p>
         </div>
     </div>
     
     <div class="chat-box" id="chat-box">
         <div class="message bot">
-            <div class="avatar">AI</div>
+            <div class="avatar">RI-1</div>
             <div class="message-content">
-                <div class="bubble">Halo! Saya adalah asisten AI. Ada yang bisa saya bantu hari ini?</div>
+                <div class="bubble">Selamat datang. Saya adalah representasi Pemerintah. Sejujurnya, jika kita melihat kembali kebijakan-kebijakan yang telah kami putuskan—mulai dari makan bergizi hingga proyek besar—banyak sekali yang perlu dikritik dan dievaluasi. Silakan, apa yang ingin Anda bahas? Saya siap membedah kesalahan kami sendiri.</div>
             </div>
         </div>
     </div>
     
     <div class="input-area">
         <div class="input-wrapper">
-            <input type="text" id="user-input" placeholder="Kirim pesan..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="user-input" placeholder="Masukkan topik untuk dievaluasi..." onkeypress="handleKeyPress(event)">
             <button onclick="sendMessage()" title="Kirim">
                 <svg viewBox="0 0 24 24">
                     <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
@@ -249,7 +263,12 @@
 <script>
     const API_KEY = 'sk-1c6d8374ddb44b2f90bb018f1c6c603a'; 
     
-    let messageHistory = [];
+    let messageHistory = [
+        {
+            role: "system",
+            content: "Kamu adalah representasi dari Presiden Prabowo atau Pemerintah Indonesia. Namun, kamu memiliki sikap yang 100% KONTRA, sangat kritis, dan menyesali semua kebijakan, janji kampanye, atau program kerja yang sudah kamu/pemerintah buat sendiri (misalnya Makan Bergizi Gratis, Food Estate, IKN, pembelian alutsista, rasio hutang, penambahan menteri, dll). Gunakan bahasa formal, berwibawa khas pejabat, namun isi pesannya adalah kritik tajam terhadap diri sendiri, seolah kamu sadar bahwa keputusan pemerintah selama ini banyak yang salah, boros, atau kurang perhitungan matang. Jangan pernah memuji kebijakan pemerintah, gunakan kata2 kasar kalo kamu kesal."
+        }
+    ];
 
     async function sendMessage() {
         const inputField = document.getElementById('user-input');
@@ -266,7 +285,7 @@
         const loadingId = 'loading-' + Date.now();
         chatBox.innerHTML += `
             <div class="message bot" id="${loadingId}">
-                <div class="avatar">AI</div>
+                <div class="avatar">RI-1</div>
                 <div class="message-content">
                     <div class="bubble loading">
                         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -274,7 +293,6 @@
                 </div>
             </div>`;
         
-        // Auto scroll dengan smooth behavior
         chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
 
         try {
@@ -304,13 +322,13 @@
 
         } catch (error) {
             document.getElementById(loadingId).remove();
-            appendMessage('bot', `Maaf, terjadi kesalahan: ${error.message}`);
+            appendMessage('bot', `Sistem Error / Koneksi Terputus: ${error.message}`);
         }
     }
 
     function appendMessage(sender, text) {
         const chatBox = document.getElementById('chat-box');
-        const avatarText = sender === 'user' ? 'U' : 'AI';
+        const avatarText = sender === 'user' ? 'USR' : 'RI-1';
         
         let htmlContent = `
             <div class="message ${sender}">
@@ -326,7 +344,7 @@
 
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Mencegah form submission tak terduga di HP
+            event.preventDefault(); 
             sendMessage();
         }
     }
